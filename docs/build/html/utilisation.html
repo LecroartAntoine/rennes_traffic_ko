@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guide d’Utilisation de l’Application de Surveillance du Trafic de Rennes &mdash; Documentation Prédiction de la circulation dans Rennes 2.0</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=e8570148"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/translations.js?v=bf059b8c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="prev" title="Prédiction de la circulation dans Rennes - Documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Prédiction de la circulation dans Rennes
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Guide d’Utilisation de l’Application de Surveillance du Trafic de Rennes</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Prédiction de la circulation dans Rennes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Guide d’Utilisation de l’Application de Surveillance du Trafic de Rennes</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/utilisation.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="guide-d-utilisation-de-l-application-de-surveillance-du-trafic-de-rennes">
+<h1>Guide d’Utilisation de l’Application de Surveillance du Trafic de Rennes<a class="headerlink" href="#guide-d-utilisation-de-l-application-de-surveillance-du-trafic-de-rennes" title="Lien vers cette rubrique"></a></h1>
+<p>Bienvenue dans l’application de surveillance du trafic de Rennes ! Cette application vous permet de visualiser en temps réel les données de trafic et d’obtenir des prédictions sur l’état de la circulation dans le centre-ville. Suivez ces étapes simples pour utiliser l’application :</p>
+<ol class="arabic simple">
+<li><p>Création de l’Environnement Virtuel</p></li>
+</ol>
+<p>Avant de commencer, nous vous recommandons de créer un environnement virtuel pour isoler les dépendances de cette application. Voici comment procéder :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Créer un environnement virtuel nommé &#39;venv&#39;</span>
+python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
+
+<span class="c1"># Activer l&#39;environnement virtuel</span>
+<span class="c1"># Sur Windows</span>
+venv<span class="se">\S</span>cripts<span class="se">\a</span>ctivate
+<span class="c1"># Sur macOS/Linux</span>
+<span class="nb">source</span><span class="w"> </span>venv/bin/activate
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Installation des Dépendances</p></li>
+</ol>
+<p>Une fois que l’environnement virtuel est activé, vous devez installer les dépendances nécessaires à l’application en utilisant le fichier requirements.txt. Assurez-vous d’être dans le répertoire racine de l’application où se trouve ce fichier.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Accès à l’Application</p></li>
+</ol>
+<p>Pour accéder à l’application, vous devez exécuter le script Python qui lance le serveur web.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>app.py
+</pre></div>
+</div>
+<p>Après avoir exécuté le script, l’application sera accessible via un navigateur web à l’adresse : <a class="reference external" href="http://localhost:5000/">http://localhost:5000/</a></p>
+<ol class="arabic simple" start="4">
+<li><p>Visualisation des Données de Trafic</p></li>
+</ol>
+<p>Une fois que vous avez accédé à l’application, vous verrez une carte interactive affichant les données de trafic de Rennes en temps réel. Vous pouvez zoomer, déplacer la carte pour explorer différentes régions de la ville.</p>
+<ol class="arabic simple" start="5">
+<li><p>Prédiction de l’État de la Circulation</p></li>
+</ol>
+<p>Pour obtenir une prédiction sur l’état de la circulation dans le centre-ville pour une heure spécifique, suivez ces étapes :</p>
+<blockquote>
+<div><p>Dans la section « Prédiction d’embouteillage pour le centre-ville », sélectionnez une heure à partir du menu déroulant. Les heures sont répertoriées de 0h à 23h.
+Cliquez sur le bouton « Envoyer ».
+Une fois la requête envoyée, vous verrez s’afficher une prédiction concernant l’état de la circulation pour l’heure sélectionnée. La prédiction sera accompagnée d’un texte indiquant si la circulation est libre, dense ou bloquée, ainsi que d’une couleur correspondante pour une meilleure visualisation.</p>
+</div></blockquote>
+<ol class="arabic simple" start="6">
+<li><p>Arrêt de l’Application</p></li>
+</ol>
+<p>Lorsque vous avez terminé d’utiliser l’application, vous pouvez arrêter le serveur en appuyant sur Ctrl + C dans le terminal où le script Python est en cours d’exécution.</p>
+<p>Profitez de l’application de surveillance du trafic de Rennes pour obtenir des informations précieuses sur l’état de la circulation et planifier vos déplacements de manière plus efficace ! Si vous avez des questions ou des commentaires, n’hésitez pas à nous contacter.</p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="index.html" class="btn btn-neutral float-left" title="Prédiction de la circulation dans Rennes - Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2024, Bertrand Fournel &amp; Lecroart Antoine.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
