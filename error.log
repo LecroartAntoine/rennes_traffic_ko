@@ -1,0 +1,70 @@
+2024-05-19 17:05:43,837:WARNING: * Debugger is active!
+2024-05-19 17:05:49,958:WARNING:CPU Usage has exceeded the threshold: Current Value: 1.0, Threshold: 0.1
+2024-05-19 17:24:37,931:WARNING:Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2024-05-19 17:24:37,933:WARNING:Error in loading the saved optimizer state. As a result, your model is starting with a freshly initialized optimizer.
+2024-05-19 17:24:37,940:INFO:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-05-19 17:24:37,940:INFO:[33mPress CTRL+C to quit[0m
+2024-05-19 17:24:37,940:INFO: * Restarting with stat
+2024-05-19 17:24:44,206:WARNING:Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2024-05-19 17:24:44,208:WARNING:Error in loading the saved optimizer state. As a result, your model is starting with a freshly initialized optimizer.
+2024-05-19 17:24:44,211:WARNING: * Debugger is active!
+2024-05-19 17:24:44,213:INFO: * Debugger PIN: 473-495-219
+2024-05-19 17:24:54,421:WARNING:CPU Usage has exceeded the threshold: Current Value: 0.9, Threshold: 0.1
+2024-05-19 17:24:55,708:INFO:127.0.0.1 - - [19/May/2024 17:24:55] "POST / HTTP/1.1" 200 -
+2024-05-19 17:24:59,697:WARNING:CPU Usage has exceeded the threshold: Current Value: 0.6, Threshold: 0.1
+2024-05-19 17:25:01,168:INFO:127.0.0.1 - - [19/May/2024 17:25:01] "POST / HTTP/1.1" 200 -
+2024-05-19 17:26:56,683:WARNING:Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2024-05-19 17:26:56,685:WARNING:Error in loading the saved optimizer state. As a result, your model is starting with a freshly initialized optimizer.
+2024-05-19 17:26:56,691:INFO:[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2024-05-19 17:26:56,691:INFO:[33mPress CTRL+C to quit[0m
+2024-05-19 17:26:56,692:INFO: * Restarting with stat
+2024-05-19 17:27:02,858:WARNING:Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2024-05-19 17:27:02,860:WARNING:Error in loading the saved optimizer state. As a result, your model is starting with a freshly initialized optimizer.
+2024-05-19 17:27:02,863:WARNING: * Debugger is active!
+2024-05-19 17:27:02,864:INFO: * Debugger PIN: 473-495-219
+2024-05-19 17:27:04,432:INFO:127.0.0.1 - - [19/May/2024 17:27:04] "POST / HTTP/1.1" 200 -
+2024-05-19 17:27:08,977:WARNING:CPU Usage has exceeded the threshold: Current Value: 0.6, Threshold: 0.1
+2024-05-19 17:27:10,414:INFO:127.0.0.1 - - [19/May/2024 17:27:10] "POST / HTTP/1.1" 200 -
+2024-05-19 17:27:52,049:INFO: * Detected change in 'c:\\Users\\LeBonCassoulet\\Documents\\GitHub\\rennes_traffic_ko\\src\\logger.py', reloading
+2024-05-19 17:27:52,354:INFO: * Restarting with stat
+2024-05-19 17:27:58,675:WARNING:Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2024-05-19 17:27:58,677:WARNING:Error in loading the saved optimizer state. As a result, your model is starting with a freshly initialized optimizer.
+2024-05-19 17:27:58,680:WARNING: * Debugger is active!
+2024-05-19 17:27:58,681:INFO: * Debugger PIN: 473-495-219
+2024-05-19 17:28:05,603:INFO: * Detected change in 'c:\\Users\\LeBonCassoulet\\Documents\\GitHub\\rennes_traffic_ko\\app.py', reloading
+2024-05-19 17:28:05,865:INFO: * Restarting with stat
+2024-05-19 17:28:12,531:WARNING:Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2024-05-19 17:28:12,533:WARNING:Error in loading the saved optimizer state. As a result, your model is starting with a freshly initialized optimizer.
+2024-05-19 17:28:12,536:WARNING: * Debugger is active!
+2024-05-19 17:28:12,537:INFO: * Debugger PIN: 473-495-219
+2024-05-19 17:28:21,975:INFO:127.0.0.1 - - [19/May/2024 17:28:21] "POST / HTTP/1.1" 200 -
+2024-05-19 17:28:38,784:INFO: * Detected change in 'c:\\Users\\LeBonCassoulet\\Documents\\GitHub\\rennes_traffic_ko\\app.py', reloading
+2024-05-19 17:28:39,104:INFO: * Restarting with stat
+2024-05-19 17:28:45,633:WARNING:Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2024-05-19 17:28:45,635:WARNING:Error in loading the saved optimizer state. As a result, your model is starting with a freshly initialized optimizer.
+2024-05-19 17:28:45,638:WARNING: * Debugger is active!
+2024-05-19 17:28:45,640:INFO: * Debugger PIN: 473-495-219
+2024-05-19 17:28:51,067:WARNING:prediction_from_model took 0.06055259704589844 seconds to execute, exceeding the 2-second threshold.
+2024-05-19 17:28:53,911:INFO:127.0.0.1 - - [19/May/2024 17:28:53] "POST / HTTP/1.1" 200 -
+2024-05-19 17:29:10,774:INFO: * Detected change in 'c:\\Users\\LeBonCassoulet\\Documents\\GitHub\\rennes_traffic_ko\\app.py', reloading
+2024-05-19 17:29:11,067:INFO: * Restarting with stat
+2024-05-19 17:29:17,393:WARNING:Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2024-05-19 17:29:17,395:WARNING:Error in loading the saved optimizer state. As a result, your model is starting with a freshly initialized optimizer.
+2024-05-19 17:29:17,398:WARNING: * Debugger is active!
+2024-05-19 17:29:17,399:INFO: * Debugger PIN: 473-495-219
+2024-05-19 17:29:39,177:INFO:127.0.0.1 - - [19/May/2024 17:29:39] "POST / HTTP/1.1" 200 -
+2024-05-19 17:29:54,988:INFO:127.0.0.1 - - [19/May/2024 17:29:54] "POST / HTTP/1.1" 200 -
+2024-05-19 17:29:56,524:INFO:127.0.0.1 - - [19/May/2024 17:29:56] "POST / HTTP/1.1" 200 -
+2024-05-19 17:29:57,843:INFO:127.0.0.1 - - [19/May/2024 17:29:57] "POST / HTTP/1.1" 200 -
+2024-05-19 17:30:11,833:INFO: * Detected change in 'c:\\Users\\LeBonCassoulet\\Documents\\GitHub\\rennes_traffic_ko\\src\\logger.py', reloading
+2024-05-19 17:30:12,120:INFO: * Restarting with stat
+2024-05-19 17:30:19,139:WARNING:Compiled the loaded model, but the compiled metrics have yet to be built. `model.compile_metrics` will be empty until you train or evaluate the model.
+2024-05-19 17:30:19,141:WARNING:Error in loading the saved optimizer state. As a result, your model is starting with a freshly initialized optimizer.
+2024-05-19 17:30:19,144:WARNING: * Debugger is active!
+2024-05-19 17:30:19,146:INFO: * Debugger PIN: 473-495-219
+2024-05-19 17:30:20,716:WARNING:CPU Usage has exceeded the threshold: Current Value: 0.8, Threshold: 0.1
+2024-05-19 17:30:21,980:INFO:127.0.0.1 - - [19/May/2024 17:30:21] "POST / HTTP/1.1" 200 -
+2024-05-19 17:30:27,047:WARNING:CPU Usage has exceeded the threshold: Current Value: 0.3, Threshold: 0.1
+2024-05-19 17:30:28,179:INFO:127.0.0.1 - - [19/May/2024 17:30:28] "POST / HTTP/1.1" 200 -

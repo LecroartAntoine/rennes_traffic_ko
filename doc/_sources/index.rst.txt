@@ -11,3 +11,11 @@ Prédiction de la circulation dans Rennes - Documentation
    :caption: Contents:
 
    utilisation
+   logging_and_alerts
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

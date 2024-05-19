@@ -1,0 +1,184 @@
+===========================
+Système de Log et d'Alertes
+===========================
+
+Ce document décrit le système de log et d'alertes mis en place dans l'application Flask pour gérer les erreurs et surveiller les métriques du système.
+
+Configuration des Logs
+======================
+
+Le système de log utilise le module `logging` de Python pour enregistrer les erreurs dans un fichier de log. Le fichier de configuration des logs est défini dans `app.py`.
+
+.. code-block:: python
+
+    import logging
+
+    # Configuration du logger
+    logging.basicConfig(
+        filename='error.log',
+        level=logging.ERROR,
+        format='%(asctime)s:%(levelname)s:%(message)s'
+    )
+
+Logs d'Erreurs
+==============
+
+Les erreurs sont capturées dans des blocs `try-except` et sont enregistrées dans le fichier de log `error.log`. En plus de l'enregistrement des erreurs, un email est envoyé à l'administrateur.
+
+Exemple d'une route Flask avec gestion des erreurs :
+
+.. code-block:: python
+
+    from flask import Flask, render_template, request
+    import traceback
+    import logging
+    from email_utils import send_error_email
+
+    app = Flask(__name__)
+
+    @app.route("/", methods=["GET", "POST"])
+    def index():
+        try:
+            # Code de la route
+        except Exception as e:
+            error_message = traceback.format_exc()
+            logging.error(error_message)
+            send_error_email(error_message)
+            return "An error occurred. The administrators have been notified."
+
+Surveillance des Métriques du Système
+=====================================
+
+La fonction `check_system_metrics` surveille l'utilisation du CPU et de la RAM. Si ces métriques dépassent un certain seuil, une alerte est loggée et un email est envoyé à l'administrateur.
+
+Exemple de la fonction `check_system_metrics` :
+
+.. code-block:: python
+
+    import psutil
+    import logging
+    from email_utils import send_metrics_alert
+
+    def check_system_metrics():
+        cpu_usage = psutil.cpu_percent(interval=1)
+        memory_info = psutil.virtual_memory()
+        memory_usage = memory_info.percent
+
+        cpu_threshold = 80.0  # Seuil pour l'utilisation du CPU en pourcentage
+        memory_threshold = 80.0  # Seuil pour l'utilisation de la RAM en pourcentage
+
+        if cpu_usage > cpu_threshold:
+            alert_message = f"CPU Usage has exceeded the threshold: Current Value: {cpu_usage}, Threshold: {cpu_threshold}"
+            logging.warning(alert_message)
+            send_metrics_alert("CPU Usage", cpu_usage, cpu_threshold)
+
+        if memory_usage > memory_threshold:
+            alert_message = f"Memory Usage has exceeded the threshold: Current Value: {memory_usage}, Threshold: {memory_threshold}"
+            logging.warning(alert_message)
+            send_metrics_alert("Memory Usage", memory_usage, memory_threshold)
+
+Monitoring du Temps d'Exécution
+===============================
+
+La fonction `prediction_from_model` est surveillée pour s'assurer que son temps d'exécution ne dépasse pas 2 secondes. Si ce seuil est dépassé, un message d'alerte est loggé et un email est envoyé à l'administrateur.
+
+Exemple de monitoring dans la fonction `index` :
+
+.. code-block:: python
+
+    import time
+
+    @app.route("/", methods=["GET", "POST"])
+    def index():
+        try:
+            if request.method == "POST":
+                # Code de la route
+
+                # Mesurer le temps d'exécution de la prédiction
+                start_time = time.time()
+                cat_predict = prediction_from_model(model, selected_hour)
+                end_time = time.time()
+                execution_time = end_time - start_time
+
+                if execution_time > 2:
+                    alert_message = f"prediction_from_model took {execution_time} seconds to execute, exceeding the 2-second threshold."
+                    logging.warning(alert_message)
+                    send_metrics_alert("Prediction Execution Time", execution_time, 2)
+
+                # Suite du code de la route
+        except Exception as e:
+            error_message = traceback.format_exc()
+            logging.error(error_message)
+            send_error_email(error_message)
+            return "An error occurred. The administrators have been notified."
+
+Envoi d'Emails
+==============
+
+Le module `email_utils.py` contient les fonctions pour envoyer des emails en cas d'erreurs ou de dépassement de seuils de métriques.
+
+Exemple de fonction pour envoyer des emails d'erreur :
+
+.. code-block:: python
+
+    import smtplib
+    from email.mime.text import MIMEText
+    from email.mime.multipart import MIMEMultipart
+    import os
+
+    def send_error_email(traceback_str):
+        sender_email = "your_email@example.com"
+        receiver_email = "admin@example.com"
+        password = os.getenv("EMAIL_PASSWORD")
+
+        message = MIMEMultipart("alternative")
+        message["Subject"] = "Error in Flask Application"
+        message["From"] = sender_email
+        message["To"] = receiver_email
+
+        text = f"An error occurred in your Flask application:\n\n{traceback_str}"
+        part = MIMEText(text, "plain")
+
+        message.attach(part)
+
+        try:
+            with smtplib.SMTP_SSL("smtp.example.com", 465) as server:
+                server.login(sender_email, password)
+                server.sendmail(
+                    sender_email, receiver_email, message.as_string()
+                )
+        except Exception as e:
+            print(f"Failed to send email: {e}")
+
+Exemple de fonction pour envoyer des alertes de métriques :
+
+.. code-block:: python
+
+    import smtplib
+    from email.mime.text import MIMEText
+    from email.mime.multipart import MIMEMultipart
+    import os
+
+    def send_metrics_alert(metric, value, threshold):
+        sender_email = "your_email@example.com"
+        receiver_email = "admin@example.com"
+        password = os.getenv("EMAIL_PASSWORD")
+
+        message = MIMEMultipart("alternative")
+        message["Subject"] = "Metrics Alert in Flask Application"
+        message["From"] = sender_email
+        message["To"] = receiver_email
+
+        text = f"The {metric} has exceeded the threshold:\n\nCurrent Value: {value}\nThreshold: {threshold}"
+        part = MIMEText(text, "plain")
+
+        message.attach(part)
+
+        try:
+            with smtplib.SMTP_SSL("smtp.example.com", 465) as server:
+                server.login(sender_email, password)
+                server.sendmail(
+                    sender_email, receiver_email, message.as_string()
+                )
+        except Exception as e:
+            print(f"Failed to send email: {e}")

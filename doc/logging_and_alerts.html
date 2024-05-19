@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Système de Log et d’Alertes &mdash; Documentation Prédiction de la circulation dans Rennes 2.0</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=e8570148"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/translations.js?v=bf059b8c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="prev" title="Guide d’Utilisation de l’Application de Surveillance du Trafic de Rennes" href="utilisation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Prédiction de la circulation dans Rennes
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="utilisation.html">Guide d’Utilisation de l’Application de Surveillance du Trafic de Rennes</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Système de Log et d’Alertes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-des-logs">Configuration des Logs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#logs-d-erreurs">Logs d’Erreurs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#surveillance-des-metriques-du-systeme">Surveillance des Métriques du Système</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#monitoring-du-temps-d-execution">Monitoring du Temps d’Exécution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#envoi-d-emails">Envoi d’Emails</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Prédiction de la circulation dans Rennes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Système de Log et d’Alertes</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/logging_and_alerts.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="systeme-de-log-et-d-alertes">
+<h1>Système de Log et d’Alertes<a class="headerlink" href="#systeme-de-log-et-d-alertes" title="Lien vers cette rubrique"></a></h1>
+<p>Ce document décrit le système de log et d’alertes mis en place dans l’application Flask pour gérer les erreurs et surveiller les métriques du système.</p>
+<section id="configuration-des-logs">
+<h2>Configuration des Logs<a class="headerlink" href="#configuration-des-logs" title="Lien vers cette rubrique"></a></h2>
+<p>Le système de log utilise le module <cite>logging</cite> de Python pour enregistrer les erreurs dans un fichier de log. Le fichier de configuration des logs est défini dans <cite>app.py</cite>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="c1"># Configuration du logger</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
+    <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;error.log&#39;</span><span class="p">,</span>
+    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">,</span>
+    <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1">:</span><span class="si">%(levelname)s</span><span class="s1">:</span><span class="si">%(message)s</span><span class="s1">&#39;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="logs-d-erreurs">
+<h2>Logs d’Erreurs<a class="headerlink" href="#logs-d-erreurs" title="Lien vers cette rubrique"></a></h2>
+<p>Les erreurs sont capturées dans des blocs <cite>try-except</cite> et sont enregistrées dans le fichier de log <cite>error.log</cite>. En plus de l’enregistrement des erreurs, un email est envoyé à l’administrateur.</p>
+<p>Exemple d’une route Flask avec gestion des erreurs :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">email_utils</span> <span class="kn">import</span> <span class="n">send_error_email</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;POST&quot;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># Code de la route</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">error_message</span> <span class="o">=</span> <span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">()</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">error_message</span><span class="p">)</span>
+        <span class="n">send_error_email</span><span class="p">(</span><span class="n">error_message</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;An error occurred. The administrators have been notified.&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="surveillance-des-metriques-du-systeme">
+<h2>Surveillance des Métriques du Système<a class="headerlink" href="#surveillance-des-metriques-du-systeme" title="Lien vers cette rubrique"></a></h2>
+<p>La fonction <cite>check_system_metrics</cite> surveille l’utilisation du CPU et de la RAM. Si ces métriques dépassent un certain seuil, une alerte est loggée et un email est envoyé à l’administrateur.</p>
+<p>Exemple de la fonction <cite>check_system_metrics</cite> :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">psutil</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">email_utils</span> <span class="kn">import</span> <span class="n">send_metrics_alert</span>
+
+<span class="k">def</span> <span class="nf">check_system_metrics</span><span class="p">():</span>
+    <span class="n">cpu_usage</span> <span class="o">=</span> <span class="n">psutil</span><span class="o">.</span><span class="n">cpu_percent</span><span class="p">(</span><span class="n">interval</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">memory_info</span> <span class="o">=</span> <span class="n">psutil</span><span class="o">.</span><span class="n">virtual_memory</span><span class="p">()</span>
+    <span class="n">memory_usage</span> <span class="o">=</span> <span class="n">memory_info</span><span class="o">.</span><span class="n">percent</span>
+
+    <span class="n">cpu_threshold</span> <span class="o">=</span> <span class="mf">80.0</span>  <span class="c1"># Seuil pour l&#39;utilisation du CPU en pourcentage</span>
+    <span class="n">memory_threshold</span> <span class="o">=</span> <span class="mf">80.0</span>  <span class="c1"># Seuil pour l&#39;utilisation de la RAM en pourcentage</span>
+
+    <span class="k">if</span> <span class="n">cpu_usage</span> <span class="o">&gt;</span> <span class="n">cpu_threshold</span><span class="p">:</span>
+        <span class="n">alert_message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;CPU Usage has exceeded the threshold: Current Value: </span><span class="si">{</span><span class="n">cpu_usage</span><span class="si">}</span><span class="s2">, Threshold: </span><span class="si">{</span><span class="n">cpu_threshold</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">alert_message</span><span class="p">)</span>
+        <span class="n">send_metrics_alert</span><span class="p">(</span><span class="s2">&quot;CPU Usage&quot;</span><span class="p">,</span> <span class="n">cpu_usage</span><span class="p">,</span> <span class="n">cpu_threshold</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">memory_usage</span> <span class="o">&gt;</span> <span class="n">memory_threshold</span><span class="p">:</span>
+        <span class="n">alert_message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Memory Usage has exceeded the threshold: Current Value: </span><span class="si">{</span><span class="n">memory_usage</span><span class="si">}</span><span class="s2">, Threshold: </span><span class="si">{</span><span class="n">memory_threshold</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">alert_message</span><span class="p">)</span>
+        <span class="n">send_metrics_alert</span><span class="p">(</span><span class="s2">&quot;Memory Usage&quot;</span><span class="p">,</span> <span class="n">memory_usage</span><span class="p">,</span> <span class="n">memory_threshold</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="monitoring-du-temps-d-execution">
+<h2>Monitoring du Temps d’Exécution<a class="headerlink" href="#monitoring-du-temps-d-execution" title="Lien vers cette rubrique"></a></h2>
+<p>La fonction <cite>prediction_from_model</cite> est surveillée pour s’assurer que son temps d’exécution ne dépasse pas 2 secondes. Si ce seuil est dépassé, un message d’alerte est loggé et un email est envoyé à l’administrateur.</p>
+<p>Exemple de monitoring dans la fonction <cite>index</cite> :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;POST&quot;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span> <span class="s2">&quot;POST&quot;</span><span class="p">:</span>
+            <span class="c1"># Code de la route</span>
+
+            <span class="c1"># Mesurer le temps d&#39;exécution de la prédiction</span>
+            <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="n">cat_predict</span> <span class="o">=</span> <span class="n">prediction_from_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">selected_hour</span><span class="p">)</span>
+            <span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="n">execution_time</span> <span class="o">=</span> <span class="n">end_time</span> <span class="o">-</span> <span class="n">start_time</span>
+
+            <span class="k">if</span> <span class="n">execution_time</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">alert_message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;prediction_from_model took </span><span class="si">{</span><span class="n">execution_time</span><span class="si">}</span><span class="s2"> seconds to execute, exceeding the 2-second threshold.&quot;</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="n">alert_message</span><span class="p">)</span>
+                <span class="n">send_metrics_alert</span><span class="p">(</span><span class="s2">&quot;Prediction Execution Time&quot;</span><span class="p">,</span> <span class="n">execution_time</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+            <span class="c1"># Suite du code de la route</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">error_message</span> <span class="o">=</span> <span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">()</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">error_message</span><span class="p">)</span>
+        <span class="n">send_error_email</span><span class="p">(</span><span class="n">error_message</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s2">&quot;An error occurred. The administrators have been notified.&quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="envoi-d-emails">
+<h2>Envoi d’Emails<a class="headerlink" href="#envoi-d-emails" title="Lien vers cette rubrique"></a></h2>
+<p>Le module <cite>email_utils.py</cite> contient les fonctions pour envoyer des emails en cas d’erreurs ou de dépassement de seuils de métriques.</p>
+<p>Exemple de fonction pour envoyer des emails d’erreur :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">smtplib</span>
+<span class="kn">from</span> <span class="nn">email.mime.text</span> <span class="kn">import</span> <span class="n">MIMEText</span>
+<span class="kn">from</span> <span class="nn">email.mime.multipart</span> <span class="kn">import</span> <span class="n">MIMEMultipart</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="k">def</span> <span class="nf">send_error_email</span><span class="p">(</span><span class="n">traceback_str</span><span class="p">):</span>
+    <span class="n">sender_email</span> <span class="o">=</span> <span class="s2">&quot;your_email@example.com&quot;</span>
+    <span class="n">receiver_email</span> <span class="o">=</span> <span class="s2">&quot;admin@example.com&quot;</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;EMAIL_PASSWORD&quot;</span><span class="p">)</span>
+
+    <span class="n">message</span> <span class="o">=</span> <span class="n">MIMEMultipart</span><span class="p">(</span><span class="s2">&quot;alternative&quot;</span><span class="p">)</span>
+    <span class="n">message</span><span class="p">[</span><span class="s2">&quot;Subject&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Error in Flask Application&quot;</span>
+    <span class="n">message</span><span class="p">[</span><span class="s2">&quot;From&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sender_email</span>
+    <span class="n">message</span><span class="p">[</span><span class="s2">&quot;To&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">receiver_email</span>
+
+    <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;An error occurred in your Flask application:</span><span class="se">\n\n</span><span class="si">{</span><span class="n">traceback_str</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">part</span> <span class="o">=</span> <span class="n">MIMEText</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="s2">&quot;plain&quot;</span><span class="p">)</span>
+
+    <span class="n">message</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">part</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP_SSL</span><span class="p">(</span><span class="s2">&quot;smtp.example.com&quot;</span><span class="p">,</span> <span class="mi">465</span><span class="p">)</span> <span class="k">as</span> <span class="n">server</span><span class="p">:</span>
+            <span class="n">server</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">sender_email</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+            <span class="n">server</span><span class="o">.</span><span class="n">sendmail</span><span class="p">(</span>
+                <span class="n">sender_email</span><span class="p">,</span> <span class="n">receiver_email</span><span class="p">,</span> <span class="n">message</span><span class="o">.</span><span class="n">as_string</span><span class="p">()</span>
+            <span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to send email: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Exemple de fonction pour envoyer des alertes de métriques :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">smtplib</span>
+<span class="kn">from</span> <span class="nn">email.mime.text</span> <span class="kn">import</span> <span class="n">MIMEText</span>
+<span class="kn">from</span> <span class="nn">email.mime.multipart</span> <span class="kn">import</span> <span class="n">MIMEMultipart</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="k">def</span> <span class="nf">send_metrics_alert</span><span class="p">(</span><span class="n">metric</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">threshold</span><span class="p">):</span>
+    <span class="n">sender_email</span> <span class="o">=</span> <span class="s2">&quot;your_email@example.com&quot;</span>
+    <span class="n">receiver_email</span> <span class="o">=</span> <span class="s2">&quot;admin@example.com&quot;</span>
+    <span class="n">password</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;EMAIL_PASSWORD&quot;</span><span class="p">)</span>
+
+    <span class="n">message</span> <span class="o">=</span> <span class="n">MIMEMultipart</span><span class="p">(</span><span class="s2">&quot;alternative&quot;</span><span class="p">)</span>
+    <span class="n">message</span><span class="p">[</span><span class="s2">&quot;Subject&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Metrics Alert in Flask Application&quot;</span>
+    <span class="n">message</span><span class="p">[</span><span class="s2">&quot;From&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sender_email</span>
+    <span class="n">message</span><span class="p">[</span><span class="s2">&quot;To&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">receiver_email</span>
+
+    <span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;The </span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s2"> has exceeded the threshold:</span><span class="se">\n\n</span><span class="s2">Current Value: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="se">\n</span><span class="s2">Threshold: </span><span class="si">{</span><span class="n">threshold</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">part</span> <span class="o">=</span> <span class="n">MIMEText</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="s2">&quot;plain&quot;</span><span class="p">)</span>
+
+    <span class="n">message</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">part</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">smtplib</span><span class="o">.</span><span class="n">SMTP_SSL</span><span class="p">(</span><span class="s2">&quot;smtp.example.com&quot;</span><span class="p">,</span> <span class="mi">465</span><span class="p">)</span> <span class="k">as</span> <span class="n">server</span><span class="p">:</span>
+            <span class="n">server</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">sender_email</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span>
+            <span class="n">server</span><span class="o">.</span><span class="n">sendmail</span><span class="p">(</span>
+                <span class="n">sender_email</span><span class="p">,</span> <span class="n">receiver_email</span><span class="p">,</span> <span class="n">message</span><span class="o">.</span><span class="n">as_string</span><span class="p">()</span>
+            <span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to send email: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="utilisation.html" class="btn btn-neutral float-left" title="Guide d’Utilisation de l’Application de Surveillance du Trafic de Rennes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2024, Bertrand Fournel &amp; Lecroart Antoine.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
